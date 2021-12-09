@@ -9,7 +9,7 @@ proto:
 
 build: proto
 
-	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ./cmd/pingserver/pingserver ./cmd/pingserver
+	CGO_ENABLED=0 go build -o ./cmd/pingserver/pingserver ./cmd/pingserver
 
 run:
 	./cmd/pingserver/pingserver
@@ -17,5 +17,13 @@ run:
 test:
 	go test -v ./... -cover
 
+tag := 0.0.2
+
 docker-build:
-	docker build . --build-arg SSH_PRIVATE_KEY --build-arg GOPRIVATE -t grpcping-srv:0.0.1
+	docker build . -t ghcr.io/mario-jimenez/grpcping-srv:$(tag)
+
+docker-push:
+	docker push ghcr.io/mario-jimenez/grpcping-srv:$(tag)
+
+docker-run:
+	docker run --rm ghcr.io/mario-jimenez/grpcping-srv:$(tag)

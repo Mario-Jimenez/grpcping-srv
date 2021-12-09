@@ -1,0 +1,7 @@
+cmd/pingserver/pingserver
+.gitignore
+.dockerignore
+.git
+Dockerfile
+Makefile
+README.md
