@@ -6,6 +6,8 @@ import (
 
 	"github.com/Mario-Jimenez/grpcping-srv/api/v1/ping"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/health"
+	"google.golang.org/grpc/health/grpc_health_v1"
 )
 
 type grpcServer struct {
@@ -19,6 +21,8 @@ func NewGRPCServer(port string, grpcOpts ...grpc.ServerOption) *grpcServer {
 
 	pingServer := newPingServer()
 	ping.RegisterPingServer(gsrv, pingServer)
+
+	grpc_health_v1.RegisterHealthServer(gsrv, health.NewServer())
 
 	return &grpcServer{server: gsrv, port: port}
 }

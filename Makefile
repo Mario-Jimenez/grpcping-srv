@@ -17,7 +17,7 @@ run:
 test:
 	go test -v ./... -cover
 
-tag := 0.0.2
+tag := 0.0.3
 
 docker-build:
 	docker build . -t ghcr.io/mario-jimenez/grpcping-srv:$(tag)
